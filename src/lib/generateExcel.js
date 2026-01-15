@@ -123,7 +123,11 @@ const generateBuySellSheet = async (workbook, formData) => {
 
         // Value row
         const r4 = 5;
-        if (h.width > 1) sheet.mergeCells(`${sc}${r4}:${ec}${r4}`);
+        // Don't merge value cells for "Valor de Venta" so we can put UF and Pesos separately
+        if (h.width > 1 && !h.t.includes('Valor')) {
+            sheet.mergeCells(`${sc}${r4}:${ec}${r4}`);
+        }
+
         const vCell = sheet.getCell(`${sc}${r4}`);
         vCell.style = valueStyle;
         vCell.alignment = { vertical: 'middle', horizontal: 'center' };
@@ -133,12 +137,16 @@ const generateBuySellSheet = async (workbook, formData) => {
         if (h.t.includes('Propiedad')) vCell.value = get(formData, 'tipo_propiedad');
         if (h.t.includes('Comuna')) vCell.value = get(formData, 'comuna');
         if (h.t.includes('Valor')) {
-            // Split logic from previous
-            sheet.unmergeCells(`${sc}${r4}:${ec}${r4}`);
-            sheet.getCell(`D${r4}`).value = get(formData, 'valor_venta_uf');
-            sheet.getCell(`D${r4}`).style = valueStyle;
-            sheet.getCell(`E${r4}`).value = get(formData, 'valor_venta_pesos');
-            sheet.getCell(`E${r4}`).style = valueStyle;
+            // Value cells are already separate (D and E)
+            const cellUF = sheet.getCell(`D${r4}`);
+            cellUF.value = get(formData, 'valor_venta_uf');
+            cellUF.style = valueStyle;
+            cellUF.alignment = { horizontal: 'center' };
+
+            const cellPesos = sheet.getCell(`E${r4}`);
+            cellPesos.value = get(formData, 'valor_venta_pesos');
+            cellPesos.style = valueStyle;
+            cellPesos.alignment = { horizontal: 'center' };
         }
         if (h.t.includes('PROMESA')) vCell.value = get(formData, 'fecha_promesa');
         if (h.t.includes('Entrega')) vCell.value = get(formData, 'fecha_entrega');
