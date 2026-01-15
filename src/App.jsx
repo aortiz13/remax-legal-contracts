@@ -163,6 +163,7 @@ function BuySellForm({ onBack, agentData }) {
       formData.append('agente_nombre', agentData.name)
       formData.append('agente_email', agentData.email)
       formData.append('tipo_solicitud', 'compraventa')
+      formData.append('etiqueta', 'contratos')
 
       // Remove empty files to prevent server errors (sending empty files can cause 500s)
       const fileFields = ['dominio_vigente', 'gp_certificado']
@@ -431,6 +432,7 @@ function LeaseForm({ onBack, agentData }) {
       formData.append('agente_nombre', agentData.name)
       formData.append('agente_email', agentData.email)
       formData.append('tipo_solicitud', 'arriendo')
+      formData.append('etiqueta', 'contratos')
       formData.append('tipo_arrendatario', tenantType)
       formData.append('tiene_fiador', hasGuarantor ? 'si' : 'no')
 
