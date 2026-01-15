@@ -18,9 +18,10 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy custom nginx config template
+COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
 EXPOSE 83
 
-CMD ["nginx", "-g", "daemon off;"]
+# Substitute env vars and start Nginx
+CMD ["/bin/sh", "-c", "envsubst '${WEBHOOK_URL}' < /etc/nginx/nginx.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
