@@ -194,7 +194,7 @@ function BuySellForm({ onBack, agentData }) {
         console.log(key, value)
       }
 
-      const response = await fetch('/webhook/legal', {
+      const response = await fetch('/webhook', {
         method: 'POST',
         body: formData
       })
@@ -459,7 +459,7 @@ function LeaseForm({ onBack, agentData }) {
       // console.log('Simulating submission...')
       // await new Promise(resolve => setTimeout(resolve, 1000))
 
-      const response = await fetch('/webhook/legal', {
+      const response = await fetch('/webhook', {
         method: 'POST',
         body: formData
       })
