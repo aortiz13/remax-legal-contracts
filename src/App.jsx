@@ -220,6 +220,19 @@ function BuySellForm({ onBack, agentData }) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
 
+    // File validation
+    const dominio = formData.get('dominio_vigente')
+    const gp = formData.get('gp_certificado')
+
+    if (!dominio || dominio.size === 0) {
+      toast.error('Debes adjuntar el Dominio Vigente.')
+      return
+    }
+    if (!gp || gp.size === 0) {
+      toast.error('Debes adjuntar el Certificado de Hipotecas y Gravámenes.')
+      return
+    }
+
     toast("¿Estás seguro de que deseas continuar?", {
       description: "Por favor verifica nuevamente los datos antes de enviar.",
       action: {
@@ -484,6 +497,14 @@ function LeaseForm({ onBack, agentData }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
+
+    // File validation
+    const dominio = formData.get('dominio_vigente')
+
+    if (!dominio || dominio.size === 0) {
+      toast.error('Debes adjuntar el Dominio Vigente.')
+      return
+    }
 
     toast("¿Estás seguro de que deseas continuar?", {
       description: "Por favor verifica nuevamente los datos antes de enviar.",
