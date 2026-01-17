@@ -450,6 +450,8 @@ function LeaseForm({ onBack, agentData }) {
       formData.append('tipo', 'arriendo')
       formData.append('tipo_arrendatario', tenantType)
       formData.append('tiene_fiador', hasGuarantor ? 'si' : 'no')
+      formData.set('con_administracion', formData.get('con_administracion') ? 'SI' : 'NO')
+      formData.set('con_restitucion', formData.get('con_restitucion') ? 'SI' : 'NO')
 
       // Remove empty files
       const fileFields = ['dominio_vigente']
@@ -537,6 +539,18 @@ function LeaseForm({ onBack, agentData }) {
             <Field label="Documenta con Cheque (SI/NO)" name="documenta_cheque" placeholder="Indicar si documenta" />
             <Field label="Cuenta para Transferencia" name="cuenta_transferencia" className="md:col-span-2" placeholder="Banco, Tipo Cta, Número, RUT" />
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="flex items-center space-x-2 border p-3 rounded-md bg-white">
+              <input type="checkbox" id="con_administracion" name="con_administracion" className="h-4 w-4 rounded border-slate-300 text-remax-blue focus:ring-remax-blue" />
+              <Label htmlFor="con_administracion" className="font-medium cursor-pointer text-slate-700">Con Administración</Label>
+            </div>
+            <div className="flex items-center space-x-2 border p-3 rounded-md bg-white">
+              <input type="checkbox" id="con_restitucion" name="con_restitucion" className="h-4 w-4 rounded border-slate-300 text-remax-blue focus:ring-remax-blue" />
+              <Label htmlFor="con_restitucion" className="font-medium cursor-pointer text-slate-700">Con Restitución</Label>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t">
             <Field label="ROL Propiedad" name="rol_propiedad" placeholder="123-45" />
             <Field label="N° Cliente Agua" name="cliente_agua" />

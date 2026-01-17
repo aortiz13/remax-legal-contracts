@@ -377,6 +377,7 @@ const generateLeaseSheet = async (workbook, formData) => {
     addRow('DOCUMENTA CHEQUE:', 'documenta_cheque'); // Using text field for YES/NO
     addRow('CANON DE ARRIENDO:', 'canon_arriendo');
     addRow('CUENTA BANCARIA :', 'cuenta_transferencia');
+    addRow('CON ADMINISTRACIÓN:', 'con_administracion', 'CON RESTITUCIÓN:', 'con_restitucion');
     // Add extra property IDs
     addRow('ROL PROPIEDAD:', 'rol_propiedad');
     addRow('N° CLIENTE AGUA:', 'cliente_agua', 'N° CLIENTE LUZ:', 'cliente_luz');
